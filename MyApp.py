@@ -19,7 +19,9 @@ import ColorConverter
 
 import webbrowser
 
+
 class IplQImage(QImage):
+
     def __init__(self, frame):
         iplimage = cv2.cv.CreateImageHeader((frame.shape[1], frame.shape[0]), cv2.cv.IPL_DEPTH_8U, 3)
         cv2.cv.SetData(iplimage, frame.tostring(), frame.dtype.itemsize * 3 * frame.shape[1])
@@ -28,7 +30,7 @@ class IplQImage(QImage):
         cv2.cv.Rectangle(alpha, (0, 0), (iplimage.width, iplimage.height), cv2.cv.ScalarAll(255), -1)
         rgba = cv2.cv.CreateMat(iplimage.height, iplimage.width, cv2.cv.CV_8UC4)
         cv2.cv.Set(rgba, (1, 2, 3, 4))
-        cv2.cv.MixChannels([iplimage, alpha],[rgba], [(0, 0),(1, 1),(2, 2),(3, 3)])
+        cv2.cv.MixChannels([iplimage, alpha], [rgba], [(0, 0), (1, 1), (2, 2), (3, 3)])
 
         self.__imagedata = rgba.tostring()
         super(IplQImage, self).__init__(self.__imagedata, iplimage.width, iplimage.height, QImage.Format_RGB32)
@@ -37,7 +39,7 @@ class IplQImage(QImage):
 class VideoWidget(QWidget):
     """ A class for rendering video coming from OpenCV """
 
-    def __init__(self, color_deficit, parent=None):
+    def __init__(self, color_deficit):
         QWidget.__init__(self)
         self.width = 1024
         self.height = 768
@@ -154,75 +156,39 @@ class DeficiencyWindow(QWidget):
 
             self.setStyleSheet(fh.read())
 
-
         self.setGeometry(300,50,600,400)
 
-
         image = QtGui.QLabel(self)
-
         pixmap = QPixmap("Binocolors.png")
-
         image.setPixmap(pixmap)
-
         image.move(150,0)
-
         image.show()
 
-
-
         label = QtGui.QLabel(self)
-
         label.setText("What type of colorblind are you?")
-
         label.move(180, 130)
 
-
-
         button = QPushButton(self)
-
         button.setText("Deuteranope deficiency")
-
         button.move(120, 180)
-
         button.clicked.connect(self.launch_clickedD)
-
         button.show()
 
-
-
         button = QPushButton(self)
-
         button.setText("Protanope deficiency")
-
         button.move(120, 250)
-
         button.clicked.connect(self.launch_clickedP)
-
         button.show()
-
-
 
         button = QPushButton(self)
-
         button.setText("Tritanope deficiency")
-
         button.move(120, 320)
-
         button.clicked.connect(self.launch_clickedT)
-
         button.show()
-
-
 
         p = self.palette()
-
         p.setColor(self.backgroundRole(), QtCore.Qt.white)
-
         self.setPalette(p)
-
-    #def open_test():
-
-    #    webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
 
     def launch_clickedD(self):
 
@@ -236,12 +202,12 @@ class DeficiencyWindow(QWidget):
         self.videoWindow.show()
         self.hide()
 
-
     def launch_clickedT(self):
 
         self.videoWindow = VideoWidget('t')
         self.videoWindow.show()
         self.hide()
+
 
 class WelcomeWindow(QWidget):
     def __init__(self, parent = None):
@@ -288,7 +254,6 @@ class WelcomeWindow(QWidget):
     def open_test(self):
 
         webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
-
 
 
 if __name__ == '__main__':
