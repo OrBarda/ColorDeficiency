@@ -1,0 +1,120 @@
+QPushButton[accessibleName="Red"] {
+    background-image: url("Red.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    height: 39px;
+}
+
+
+QPushButton[accessibleName="Red"]:pressed {
+    background-image: url("RedPressed.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Green"] {
+    background-image: url("Green.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    height: 39px;
+}
+
+QPushButton[accessibleName="Green"]:pressed {
+    background-image: url("GreenPressed.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Blue"] {
+    background-image: url("Blue.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    height: 39px;
+}
+
+
+QPushButton[accessibleName="Blue"]:pressed {
+    background-image: url("BluePressed.png");
+    border-style: outset;
+}
+
+QVBoxLayout {
+	margin: 1.5em auto 1.5em auto;
+  	border: .1em;
+  	padding: .9em;
+}
+
+QScrollBar:vertical {
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     background: #486b8a;
+     width: 25px;
+     height: 290px;
+     margin: 22px 0 22px 0;
+ }
+
+ QScrollBar::handle:vertical {
+     background: white;
+     height: 10px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+
+ }
+
+ QScrollBar::add-line:vertical {
+     border: 2px solid grey;
+     background: #486b8a;
+     height: 20px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::sub-line:vertical {
+     border: 2px solid grey;
+     background: #486b8a;
+     height: 20px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+     border: 2px solid grey;
+     width: 3px;
+     height: 1px;
+     background: white;
+ }
+
+ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }

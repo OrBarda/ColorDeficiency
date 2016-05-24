@@ -1,0 +1,37 @@
+QPushButton {
+    background-color: #9cbac9;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 15px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 10px;
+    width: 350px;
+    height: 30px;
+}
+
+QPushButton:pressed {
+    background-color: white;
+    border-style: inset;
+}
+
+QVBoxLayout {
+	margin: 1.5em auto 1.5em auto;
+  	border: .1em;
+  	padding: .9em;
+}
+
+QLabel {
+    background-image: url("Binocolors.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    height: 116px;
+}
