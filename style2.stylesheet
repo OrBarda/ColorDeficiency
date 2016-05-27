@@ -1,5 +1,33 @@
-QPushButton[accessibleName="Yes"] {
-    background-image: url("yes.png");
+QPushButton[accessibleName="Red"] {
+    background-image: url("protan.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 350px;
+    height: 67px;
+}
+
+QPushButton[accessibleName="Green"] {
+    background-image: url("deutan.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 350px;
+    height: 67px;
+}
+
+QPushButton[accessibleName="Blue"] {
+    background-image: url("tritan.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -13,21 +41,7 @@ QPushButton[accessibleName="Yes"] {
 }
 
 
-QPushButton[accessibleName="No"] {
-    background-image: url("no.png");
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: transparent;
-    font: bold 14px;
-    min-width: 10em;
-    padding: 0;
-    margin: 0;
-    width: 350px;
-    height: 67px;
-}
-
-QLabel[accessibleName="logo"]{
+QLabel {
     background-image: url("Binocolors.png");
     border-style: outset;
     border-width: 2px;
@@ -39,18 +53,4 @@ QLabel[accessibleName="logo"]{
     margin: 0;
     width: 300px;
     height: 116px;
-}
-
-QLabel [accessibleName="question"]{
-    background-image: url("question1.png");
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 5px;
-    border-color: transparent;
-    font: bold 14px;
-    min-width: 10em;
-    padding: 0;
-    margin: 0;
-    width: 400px;
-    height: 32px;
 }

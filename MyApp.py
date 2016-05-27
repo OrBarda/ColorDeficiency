@@ -6,17 +6,11 @@ sys.path.append('/usr/lib/pyshared/python2.7/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
 
 from PyQt4 import QtCore
-
 from PyQt4.QtGui import *
-
 from PyQt4 import QtGui
-
 import numpy
-
 import cv2
-
 import ColorConverter
-
 import webbrowser
 
 
@@ -34,6 +28,36 @@ class IplQImage(QImage):
 
         self.__imagedata = rgba.tostring()
         super(IplQImage, self).__init__(self.__imagedata, iplimage.width, iplimage.height, QImage.Format_RGB32)
+
+
+class HoverEvent(QPushButton):
+
+    def __init__(self, style, hoverStyle, name, parent):
+
+        self.name = name
+        self.hoverStyle = hoverStyle
+        self.style = style
+
+        QPushButton.__init__(self, parent)
+
+        self.fhs = open(self.hoverStyle)
+        self.fs = open(self.style)
+
+        self.setStyleSheet(self.fs.read())
+
+        self.setAccessibleName(self.name)
+        self.setMouseTracking(True)
+        self.show()
+
+    def enterEvent(self, event):
+
+        self.fhs.seek(0)
+        self.setStyleSheet(self.fhs.read())
+
+    def leaveEvent(self, event):
+
+        self.fs.seek(0)
+        self.setStyleSheet(self.fs.read())
 
 
 class VideoWidget(QWidget):
@@ -58,40 +82,29 @@ class VideoWidget(QWidget):
         self._timer.timeout.connect(self.queryFrame)
         self._timer.start(50)
 
-    # def enterEvent(self, event):
-    #     self.mouseover.show()
-    #
-    # def leaveEvent(self, event):
-    #     self.mouseover.hide()
-
     def design(self):
 
         sshFile = "style.stylesheet"
         with open(sshFile, "r") as fh:
             self.setStyleSheet(fh.read())
 
-        self.setWindowTitle('PyQt - OpenCV Test')
-
-        # self.mouseover = QtGui.QPushButton(self)
-        # self.mouseover.setAccessibleName("Red")
-        # self.mouseover.move(100, 100)
-        # self.mouseover.setMouseTracking(True)
+        # mouseover = HoverEvent(self)
 
         red = QtGui.QPushButton(self)
         red.setAccessibleName("Red")
-        red.move(self.width * 0.13, self.height * 0.85)
-        red.clicked.connect(self.set_to_d)
+        red.move(self.width * 0.13, self.height * 0.93)
+        red.clicked.connect(self.set_to_p)
         red.show()
 
         green = QtGui.QPushButton(self)
         green.setAccessibleName("Green")
-        green.move(self.width * 0.13 + 270, self.height * 0.85)
-        green.clicked.connect(self.set_to_p)
+        green.move(self.width * 0.13 + 270, self.height * 0.93)
+        green.clicked.connect(self.set_to_d)
         green.show()
 
         blue = QtGui.QPushButton(self)
         blue.setAccessibleName("Blue")
-        blue.move(self.width * 0.13 + 540, self.height * 0.85)
+        blue.move(self.width * 0.13 + 540, self.height * 0.93)
         blue.clicked.connect(self.set_to_t)
         blue.show()
 
@@ -99,14 +112,14 @@ class VideoWidget(QWidget):
         self.scale.setMaximum(0)
         self.scale.setMinimum(-100)
         self.scale.setValue(-100)
-        self.scale.move(self.width * 0.93, self.height * 0.125)
+        self.scale.move(self.width * 0.975, self.height * 0.125)
         self.scale.valueChanged.connect(self.set_key)
         self.scale.show()
 
         self.zoom = QtGui.QScrollBar(self)
         self.zoom.setMaximum(0)
         self.zoom.setMinimum(-100)
-        self.zoom.move(self.width * 0.93, self.height * 0.125 + 300)
+        self.zoom.move(self.width * 0.975, self.height * 0.125 + 300)
         self.zoom.valueChanged.connect(self.set_key)
         self.zoom.setWindowTitle("zoom")
         self.zoom.show()
@@ -150,9 +163,10 @@ class DeficiencyWindow(QWidget):
     def __init__(self, parent = None):
         QWidget.__init__(self)
 
-        sshFile="style1.stylesheet"
+        self.sshFile="style2.stylesheet"
+        self.hoverStyle = "hoverstyle.stylesheet"
 
-        with open(sshFile, "r") as fh:
+        with open(self.sshFile, "r") as fh:
 
             self.setStyleSheet(fh.read())
 
@@ -164,27 +178,21 @@ class DeficiencyWindow(QWidget):
         image.move(150,0)
         image.show()
 
-        label = QtGui.QLabel(self)
-        label.setText("What type of colorblind are you?")
-        label.move(180, 130)
+        # label = QtGui.QLabel(self)
+        # label.setText("What type of colorblind are you?")
+        # label.move(180, 130)
 
-        button = QPushButton(self)
-        button.setText("Deuteranope deficiency")
-        button.move(120, 180)
-        button.clicked.connect(self.launch_clickedD)
-        button.show()
+        red = HoverEvent(self.sshFile, self.hoverStyle, "Red", self)
+        red.move(120, 150)
+        red.clicked.connect(self.launch_clickedP)
 
-        button = QPushButton(self)
-        button.setText("Protanope deficiency")
-        button.move(120, 250)
-        button.clicked.connect(self.launch_clickedP)
-        button.show()
+        green = HoverEvent(self.sshFile, self.hoverStyle, "Green", self)
+        green.move(120, 230)
+        green.clicked.connect(self.launch_clickedD)
 
-        button = QPushButton(self)
-        button.setText("Tritanope deficiency")
-        button.move(120, 320)
-        button.clicked.connect(self.launch_clickedT)
-        button.show()
+        blue = HoverEvent(self.sshFile, self.hoverStyle, "Blue", self)
+        blue.move(120, 310)
+        blue.clicked.connect(self.launch_clickedT)
 
         p = self.palette()
         p.setColor(self.backgroundRole(), QtCore.Qt.white)
@@ -210,40 +218,43 @@ class DeficiencyWindow(QWidget):
 
 
 class WelcomeWindow(QWidget):
+
     def __init__(self, parent = None):
         QWidget.__init__(self)
 
-        sshFile="style1.stylesheet"
-        with open(sshFile, "r") as fh:
-            self.setStyleSheet(fh.read())
+        self.sshFile="style1.stylesheet"
+        self.hoverStyle = "hoverstyle.stylesheet"
+
+        fh = open(self.sshFile, "r")
+        self.setStyleSheet(fh.read())
 
         self.setGeometry(300, 50, 600, 400)
 
         image = QtGui.QLabel(self)
         pixmap = QPixmap("Binocolors.png")
+        image.setAccessibleName("logo")
         image.setPixmap(pixmap)
         image.move(150, 0)
         image.show()
 
         label = QtGui.QLabel(self)
-        label.setText("Do you know what type of colorblind are you?")
-        label.move(145, 150)
+        pixmap = QPixmap("question1.png")
+        label.setAccessibleName("question")
+        label.setPixmap(pixmap)
+        label.move(100, 130)
+        label.show()
 
         p = self.palette()
         p.setColor(self.backgroundRole(), QtCore.Qt.white)
         self.setPalette(p)
 
-        button = QPushButton(self)
-        button.setText("Yes!")
-        button.move(120, 220)
-        button.clicked.connect(self.launch_if_yes)
-        button.show()
+        yes = HoverEvent(self.sshFile, self.hoverStyle, "Yes", self)
+        yes.move(120, 200)
+        yes.clicked.connect(self.launch_if_yes)
 
-        button = QPushButton(self)
-        button.setText("No, Lets Find Out!")
-        button.move(120, 300)
-        button.clicked.connect(self.open_test)
-        button.show()
+        no = HoverEvent(self.sshFile, self.hoverStyle, "No", self)
+        no.move(120, 290)
+        no.clicked.connect(self.open_test)
 
     def launch_if_yes(self):
 

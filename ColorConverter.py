@@ -6,14 +6,10 @@ sys.path.append('/usr/lib/pyshared/python2.7/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
 
 import numpy
-import os.path
 import cv2
-from timeit import default_timer as timer
-import threading, time
 
 
 class ColorConverter(object):
-
 
     """
        MoinMoin - Daltonize ImageCorrection - Effect
@@ -88,16 +84,8 @@ class ColorConverter(object):
 
         self.zoom = 1.0
 
-
-    def get_image(self):
-        # read is the easiest way to get a full image out of a VideoCapture object.
-        ret, im = self.camera.read()
-        return im
-
-
     def get_image1(self):
         return cv2.imread("/Users/orbarda/Desktop/board.jpg")
-
 
     def newvideo(self, color_deficit):
 
@@ -121,7 +109,6 @@ class ColorConverter(object):
         else:
             cv2.imwrite("/Users/orbarda/Desktop/ProtanopePic.jpg", result)
 
-
     def imagezoom(self, cv2_image):
         x = ((cv2_image.shape[0] / self.zoom) * self.zoom / 2.0) - (cv2_image.shape[0] / self.zoom / 2.0)
         y = ((cv2_image.shape[1] / self.zoom) * self.zoom / 2.0) - (cv2_image.shape[1] / self.zoom / 2.0)
@@ -131,48 +118,31 @@ class ColorConverter(object):
 
         return cv2.resize(rect, (1024, 768))
 
-
     def convert(self, cv2_image):
 
-        # start = timer()
         zoomed = self.imagezoom(cv2_image)
 
         rgb = numpy.asarray(cv2.cvtColor(zoomed, cv2.COLOR_BGR2RGB), dtype=float)
-        # lightReflectReduction(im)
 
         err = self.execute(rgb, self.transmat_deficit)
         scaledErr = 0.01 * err
-
         dtpn = (self.key * scaledErr + rgb).clip(min=0, max=255)
-        # dtpn = dtpn.clip(max=255)
-        # dtpn = err + rgb
 
         result = numpy.asarray(cv2.cvtColor(dtpn.astype('uint8'), cv2.COLOR_RGB2BGR), dtype='uint8')
         return result
 
-        # cv2.imshow('image', numpy.concatenate((result,resized.astype('uint8')), axis=1))
-        # cv2.imshow('before', resized.astype('uint8'))
-        # cv2.imshow('after', result)
-        # cv2.waitKey(1)
-
-
     def execute(self, RGB, man_matrix):
-        # start = timer()
+
         # http://stackoverflow.com/questions/25922212/element-wise-matrix-multiplication-in-numpy
         # By multiplying 3 matrices we are moving from rgb to lms space, and then calculate the image
         # as seen by a color blind' and finally get back to rgb space
         _RGB = numpy.einsum('ij,klj->kli', man_matrix, RGB)
-
-        # print('calc', timer() - start)
 
         # Calculate error between images
         error = (RGB - _RGB)
 
         # Daltonize: calculating the values for each pixel to be add to
         ERR = numpy.einsum('ij,klj->kli', self.err2mod, error)
-
-        # Save daltonized image
-        # im_converted = Image.fromarray(result, mode='RGB')
 
         return ERR
 
@@ -189,12 +159,3 @@ class ColorConverter(object):
         self.zoom = 1.0 + (zoom / 100.0)
 
 
-    # def thread1():
-    #     global key
-    #     lock = threading.Lock()
-    #     while True:
-    #         with lock:
-    #             key = input()
-
-
-    # threading.Thread(target = thread1).start()
