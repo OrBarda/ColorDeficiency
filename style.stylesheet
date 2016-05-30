@@ -1,80 +1,118 @@
-QPushButton[accessibleName="Transparent"] {
-    background: transparent;
+QPushButton[accessibleName="Zoom"] {
+    background-image: url("zoom.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: transparent;
     font: bold 14px;
-    min-width: 10em;
     padding: 0;
     margin: 0;
-    width: 250px;
-    height: 39px;
+    width: 101px;
+    height: 80px;
 }
 
-QPushButton[accessibleName="Red"] {
-    background-image: url("Red.png");
+QPushButton[accessibleName="Adj"] {
+    background-image: url("adj.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: transparent;
     font: bold 14px;
-    min-width: 10em;
     padding: 0;
     margin: 0;
-    width: 250px;
-    height: 39px;
+    width: 84px;
+    height: 80px;
 }
 
-
-QPushButton[accessibleName="Red"]:pressed {
-    background-image: url("RedPressed.png");
-    border-style: outset;
-}
-
-QPushButton[accessibleName="Green"] {
-    background-image: url("Green.png");
+QPushButton[accessibleName="Def"] {
+    background-image: url("def.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: transparent;
     font: bold 14px;
-    min-width: 10em;
     padding: 0;
     margin: 0;
-    width: 250px;
-    height: 39px;
+    width: 102px;
+    height: 80px;
 }
 
-QPushButton[accessibleName="Green"]:pressed {
-    background-image: url("GreenPressed.png");
-    border-style: outset;
-}
-
-QPushButton[accessibleName="Blue"] {
-    background-image: url("Blue.png");
+QPushButton[accessibleName="FullScreen"] {
+    background-image: url("fullscreen.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
     border-color: transparent;
     font: bold 14px;
-    min-width: 10em;
     padding: 0;
     margin: 0;
-    width: 250px;
-    height: 39px;
+    width: 84px;
+    height: 80px;
 }
 
-
-QPushButton[accessibleName="Blue"]:pressed {
-    background-image: url("BluePressed.png");
+QPushButton[accessibleName="Capture"] {
+    background-image: url("capture.png");
     border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 84px;
+    height: 80px;
 }
 
-QVBoxLayout {
-	margin: 1.5em auto 1.5em auto;
-  	border: .1em;
-  	padding: .9em;
+QPushButton[accessibleName="Rec"] {
+    background-image: url("rec.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 119px;
+    height: 80px;
+}
+
+QPushButton[accessibleName="Protan"] {
+    background-image: url("videoProtan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 102px;
+    height: 41px;
+}
+
+QPushButton[accessibleName="Deutan"] {
+    background-image: url("videoDeutan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 102px;
+    height: 41px;
+}
+
+QPushButton[accessibleName="Tritan"] {
+    background-image: url("videoTritan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 102px;
+    height: 41px;
 }
 
 QScrollBar:vertical {
@@ -82,8 +120,8 @@ QScrollBar:vertical {
      border-width: 2px;
      border-radius: 5px;
      border-color: transparent;
-     background: #486b8a;
-     width: 25px;
+     background: #6696a1;
+     width: 15px;
      height: 290px;
      margin: 22px 0 22px 0;
  }
@@ -100,7 +138,7 @@ QScrollBar:vertical {
 
  QScrollBar::add-line:vertical {
      border: 2px solid grey;
-     background: #486b8a;
+     background: #6696a1;
      height: 20px;
      border-style: outset;
      border-width: 2px;
@@ -112,7 +150,7 @@ QScrollBar:vertical {
 
  QScrollBar::sub-line:vertical {
      border: 2px solid grey;
-     background: #486b8a;
+     background: #6696a1;
      height: 20px;
      border-style: outset;
      border-width: 2px;

@@ -63,18 +63,25 @@ class HoverEvent(QPushButton):
 class VideoWidget(QWidget):
     """ A class for rendering video coming from OpenCV """
 
-    def __init__(self, color_deficit):
+    def __init__(self, color_deficit, parent=None):
+
         QWidget.__init__(self)
+        self.imageCount = 1
+        self.isOnZoom = False
+        self.isOnAdj = False
+        self.isOnDef = False
         self.width = 1024
         self.height = 768
+
+        self.setMinimumSize(self.width, self.height)
+        self.setMaximumSize(self.minimumSize())
+        self.design()
+
         self.capture = cv2.VideoCapture(0)
         # Take one frame to query height
         ret, frame = self.capture.read()
         self.color_converter = ColorConverter.ColorConverter(color_deficit)
         image = self.color_converter.convert(frame)
-        self.setMinimumSize(self.width, self.height)
-        self.setMaximumSize(self.minimumSize())
-        self.design()
         self._frame = None
         self._image = self._build_image(image)
         # Paint every 50 ms
@@ -84,48 +91,51 @@ class VideoWidget(QWidget):
 
     def design(self):
 
-        sshFile = "style.stylesheet"
-        with open(sshFile, "r") as fh:
+        self.toolbarStyle = "toolbarStyle.stylesheet"
+        self.hoverStyle = "videoHoverStyle.stylesheet"
+        self.sshFile = "style.stylesheet"
+
+        with open(self.sshFile, "r") as fh:
             self.setStyleSheet(fh.read())
 
-        # mouseover = HoverEvent(self)
+        zoom = HoverEvent(self.sshFile, self.hoverStyle, "Zoom", self)
+        zoom.move(self.width * 0.13 + 590, self.height * 0.883)
+        zoom.clicked.connect(self.open_zoom)
 
-        red = QtGui.QPushButton(self)
-        red.setAccessibleName("Red")
-        red.move(self.width * 0.13, self.height * 0.93)
-        red.clicked.connect(self.set_to_p)
-        red.show()
+        adjust = HoverEvent(self.sshFile, self.hoverStyle, "Adj", self)
+        adjust.move(self.width * 0.13 + 506, self.height * 0.883)
+        adjust.clicked.connect(self.open_adj)
 
-        green = QtGui.QPushButton(self)
-        green.setAccessibleName("Green")
-        green.move(self.width * 0.13 + 270, self.height * 0.93)
-        green.clicked.connect(self.set_to_d)
-        green.show()
+        deficiency = HoverEvent(self.sshFile, self.hoverStyle, "Def", self)
+        deficiency.move(self.width * 0.13 + 404, self.height * 0.883)
+        deficiency.clicked.connect(self.open_def)
 
-        blue = QtGui.QPushButton(self)
-        blue.setAccessibleName("Blue")
-        blue.move(self.width * 0.13 + 540, self.height * 0.93)
-        blue.clicked.connect(self.set_to_t)
-        blue.show()
+        fullScreen = HoverEvent(self.sshFile, self.hoverStyle, "FullScreen", self)
+        fullScreen.move(self.width * 0.13 + 320, self.height * 0.883)
+        fullScreen.clicked.connect(self.set_to_t)
+
+        capture = HoverEvent(self.sshFile, self.hoverStyle, "Capture", self)
+        capture.move(self.width * 0.13 + 236, self.height * 0.883)
+        capture.clicked.connect(self.capture_image)
+
+        rec = HoverEvent(self.sshFile, self.hoverStyle, "Rec", self)
+        rec.move(self.width * 0.13 + 117, self.height * 0.883)
+        rec.clicked.connect(self.set_to_t)
+
+        self.zoom = QtGui.QScrollBar(self)
+        self.zoom.setMaximum(0)
+        self.zoom.setMinimum(-100)
+        self.zoom.move(self.width * 0.13 + 590, self.height * 0.883 - 277)
+        self.zoom.valueChanged.connect(self.set_key)
+        self.zoom.hide()
 
         self.scale = QtGui.QScrollBar(self)
         self.scale.setMaximum(0)
         self.scale.setMinimum(-100)
         self.scale.setValue(-100)
-        self.scale.move(self.width * 0.975, self.height * 0.125)
+        self.scale.move(self.width * 0.13 + 506, self.height * 0.883 - 277)
         self.scale.valueChanged.connect(self.set_key)
-        self.scale.show()
-
-        self.zoom = QtGui.QScrollBar(self)
-        self.zoom.setMaximum(0)
-        self.zoom.setMinimum(-100)
-        self.zoom.move(self.width * 0.975, self.height * 0.125 + 300)
-        self.zoom.valueChanged.connect(self.set_key)
-        self.zoom.setWindowTitle("zoom")
-        self.zoom.show()
-
-    # def set_key(self):
-    #     self.widget.set_key(-1 * self.scale.value(), -1 * self.zoom.value())
+        self.scale.hide()
 
     def _build_image(self, frame):
         self._frame = frame
@@ -144,6 +154,55 @@ class VideoWidget(QWidget):
         image = self.color_converter.convert(frame)
         self._image = self._build_image(image)
         self.update()
+
+    def capture_image(self):
+        cv2.imwrite("/Users/orbarda/Desktop/BinocolorsImage" + str(self.imageCount) + ".jpg", self._frame)
+        self.imageCount += 1
+
+    def open_def(self):
+
+        if(self.isOnDef == False):
+            self.protan = HoverEvent(self.sshFile, self.hoverStyle, "Protan", self)
+            self.protan.move(self.width * 0.13 + 406, self.height * 0.89 - 112)
+            self.protan.clicked.connect(self.set_to_p)
+
+            self.deutan = HoverEvent(self.sshFile, self.hoverStyle, "Deutan", self)
+            self.deutan.move(self.width * 0.13 + 406, self.height * 0.89 - 71)
+            self.deutan.clicked.connect(self.set_to_d)
+
+            self.tritan = HoverEvent(self.sshFile, self.hoverStyle, "Tritan", self)
+            self.tritan.move(self.width * 0.13 + 406, self.height * 0.89 - 30)
+            self.tritan.clicked.connect(self.set_to_t)
+
+            self.isOnDef = True
+        else:
+            self.protan.hide()
+            self.deutan.hide()
+            self.tritan.hide()
+
+            self.isOnDef = False
+
+    def open_zoom(self):
+
+        if(self.isOnZoom == False):
+
+            self.zoom.show()
+            self.isOnZoom = True
+
+        else:
+            self.zoom.hide()
+            self.isOnZoom = False
+
+    def open_adj(self):
+
+        if(self.isOnAdj == False):
+
+            self.scale.show()
+            self.isOnAdj = True
+
+        else:
+            self.scale.hide()
+            self.isOnAdj = False
 
     def set_to_d(self):
         self.color_converter.set_deficit('d')
@@ -183,15 +242,15 @@ class DeficiencyWindow(QWidget):
         # label.move(180, 130)
 
         red = HoverEvent(self.sshFile, self.hoverStyle, "Red", self)
-        red.move(120, 150)
+        red.move(130, 150)
         red.clicked.connect(self.launch_clickedP)
 
         green = HoverEvent(self.sshFile, self.hoverStyle, "Green", self)
-        green.move(120, 230)
+        green.move(130, 230)
         green.clicked.connect(self.launch_clickedD)
 
         blue = HoverEvent(self.sshFile, self.hoverStyle, "Blue", self)
-        blue.move(120, 310)
+        blue.move(130, 310)
         blue.clicked.connect(self.launch_clickedT)
 
         p = self.palette()
