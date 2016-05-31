@@ -1,3 +1,4 @@
+
 QPushButton[accessibleName="Yes"] {
     background-image: url("yes.png");
     border-style: outset;

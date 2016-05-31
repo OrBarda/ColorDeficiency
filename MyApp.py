@@ -82,12 +82,11 @@ class VideoWidget(QWidget):
         ret, frame = self.capture.read()
         self.color_converter = ColorConverter.ColorConverter(color_deficit)
         image = self.color_converter.convert(frame)
-        self._frame = None
         self._image = self._build_image(image)
         # Paint every 50 ms
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.queryFrame)
-        self._timer.start(50)
+        self._timer.start(10)
 
     def design(self):
 
@@ -143,7 +142,8 @@ class VideoWidget(QWidget):
         #     cv.Copy(frame, self._frame)
         # else:
         #     cv.Flip(frame, self._frame, 0)
-        return IplQImage(numpy.fliplr(self._frame))
+        # return IplQImage(numpy.fliplr(self._frame))
+        return IplQImage(self._frame)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -158,20 +158,27 @@ class VideoWidget(QWidget):
     def capture_image(self):
         cv2.imwrite("/Users/orbarda/Desktop/BinocolorsImage" + str(self.imageCount) + ".jpg", self._frame)
         self.imageCount += 1
+        # img = numpy.zeros([self.width, self.height, 3], dtype=numpy.uint8)
+        # img.fill(255)
+        # self._image = self._build_image(img)
+        self.update()
+        cv2.waitKey(500)
+
 
     def open_def(self):
 
         if(self.isOnDef == False):
+
             self.protan = HoverEvent(self.sshFile, self.hoverStyle, "Protan", self)
-            self.protan.move(self.width * 0.13 + 406, self.height * 0.89 - 112)
+            self.protan.move(self.width * 0.13 + 406, self.height * 0.89 - 116)
             self.protan.clicked.connect(self.set_to_p)
 
             self.deutan = HoverEvent(self.sshFile, self.hoverStyle, "Deutan", self)
-            self.deutan.move(self.width * 0.13 + 406, self.height * 0.89 - 71)
+            self.deutan.move(self.width * 0.13 + 406, self.height * 0.89 - 75)
             self.deutan.clicked.connect(self.set_to_d)
 
             self.tritan = HoverEvent(self.sshFile, self.hoverStyle, "Tritan", self)
-            self.tritan.move(self.width * 0.13 + 406, self.height * 0.89 - 30)
+            self.tritan.move(self.width * 0.13 + 406, self.height * 0.89 - 34)
             self.tritan.clicked.connect(self.set_to_t)
 
             self.isOnDef = True
@@ -302,6 +309,10 @@ class WelcomeWindow(QWidget):
         label.setPixmap(pixmap)
         label.move(100, 130)
         label.show()
+
+        # p = self.palette()
+        # p.setBrush(QPalette.Background, QBrush(QPixmap("images")))
+        # self.setPalette(p)
 
         p = self.palette()
         p.setColor(self.backgroundRole(), QtCore.Qt.white)

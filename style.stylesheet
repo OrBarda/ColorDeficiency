@@ -121,7 +121,7 @@ QScrollBar:vertical {
      border-radius: 5px;
      border-color: transparent;
      background: #6696a1;
-     width: 15px;
+     width: 20px;
      height: 290px;
      margin: 22px 0 22px 0;
  }

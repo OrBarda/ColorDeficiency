@@ -116,7 +116,7 @@ class ColorConverter(object):
         y1 = cv2_image.shape[1] / self.zoom
         rect = cv2_image[x:x1, y:y1]
 
-        return cv2.resize(rect, (1024, 768))
+        return cv2.resize(rect, (1024, 768), interpolation = cv2.INTER_LANCZOS4)
 
     def convert(self, cv2_image):
 
