@@ -5,6 +5,8 @@ sys.path.append('/usr/lib/python2.7/dist-packages')
 sys.path.append('/usr/lib/pyshared/python2.7/')
 sys.path.append('/usr/local/lib/python2.7/site-packages/')
 
+from PyQt4.QtCore import QUrl
+from PyQt4 import QtWebKit
 from PyQt4 import QtCore
 from PyQt4.QtGui import *
 from PyQt4 import QtGui
@@ -86,45 +88,52 @@ class VideoWidget(QWidget):
         # Paint every 50 ms
         self._timer = QtCore.QTimer(self)
         self._timer.timeout.connect(self.queryFrame)
-        self._timer.start(10)
+        self._timer.start(50)
 
     def design(self):
 
-        self.toolbarStyle = "toolbarStyle.stylesheet"
-        self.hoverStyle = "videoHoverStyle.stylesheet"
-        self.sshFile = "style.stylesheet"
+        self.hoverStyle = "newvideoHoverStyle.stylesheet"
+        self.sshFile = "newstyle.stylesheet"
 
         with open(self.sshFile, "r") as fh:
             self.setStyleSheet(fh.read())
 
+
+        image = QtGui.QLabel(self)
+        pixmap = QPixmap("label.png")
+        image.setAccessibleName("Label")
+        image.setPixmap(pixmap)
+        image.move(self.width * 0.2, self.height * 0.85)
+        image.show()
+
         zoom = HoverEvent(self.sshFile, self.hoverStyle, "Zoom", self)
-        zoom.move(self.width * 0.13 + 590, self.height * 0.883)
+        zoom.move(self.width * 0.2 + 513, self.height * 0.85 + 4)
         zoom.clicked.connect(self.open_zoom)
 
         adjust = HoverEvent(self.sshFile, self.hoverStyle, "Adj", self)
-        adjust.move(self.width * 0.13 + 506, self.height * 0.883)
+        adjust.move(self.width * 0.2 + 20, self.height * 0.85 + 4)
         adjust.clicked.connect(self.open_adj)
 
         deficiency = HoverEvent(self.sshFile, self.hoverStyle, "Def", self)
-        deficiency.move(self.width * 0.13 + 404, self.height * 0.883)
+        deficiency.move(self.width * 0.2 + 283, self.height * 0.85 + 4)
         deficiency.clicked.connect(self.open_def)
 
         fullScreen = HoverEvent(self.sshFile, self.hoverStyle, "FullScreen", self)
-        fullScreen.move(self.width * 0.13 + 320, self.height * 0.883)
+        fullScreen.move(self.width * 0.2 + 373, self.height * 0.85 + 4)
         fullScreen.clicked.connect(self.set_to_t)
 
         capture = HoverEvent(self.sshFile, self.hoverStyle, "Capture", self)
-        capture.move(self.width * 0.13 + 236, self.height * 0.883)
+        capture.move(self.width * 0.2 + 143, self.height * 0.85 + 4)
         capture.clicked.connect(self.capture_image)
 
         rec = HoverEvent(self.sshFile, self.hoverStyle, "Rec", self)
-        rec.move(self.width * 0.13 + 117, self.height * 0.883)
+        rec.move(self.width * 0.2 + 213, self.height * 0.85 + 4)
         rec.clicked.connect(self.set_to_t)
 
         self.zoom = QtGui.QScrollBar(self)
-        self.zoom.setMaximum(0)
+        self.zoom.setMaximum(-1)
         self.zoom.setMinimum(-100)
-        self.zoom.move(self.width * 0.13 + 590, self.height * 0.883 - 277)
+        self.zoom.move(self.width * 0.2 + 592, self.height * 0.85 - 218)
         self.zoom.valueChanged.connect(self.set_key)
         self.zoom.hide()
 
@@ -132,7 +141,7 @@ class VideoWidget(QWidget):
         self.scale.setMaximum(0)
         self.scale.setMinimum(-100)
         self.scale.setValue(-100)
-        self.scale.move(self.width * 0.13 + 506, self.height * 0.883 - 277)
+        self.scale.move(self.width * 0.2 - 20, self.height * 0.85 - 218)
         self.scale.valueChanged.connect(self.set_key)
         self.scale.hide()
 
@@ -169,16 +178,23 @@ class VideoWidget(QWidget):
 
         if(self.isOnDef == False):
 
+            self.defBase = QtGui.QLabel(self)
+            pixmap = QPixmap("defbase.png")
+            self.defBase.setAccessibleName("DefBase")
+            self.defBase.setPixmap(pixmap)
+            self.defBase.move(self.width * 0.2 + 283, self.height * 0.85 - 127)
+            self.defBase.show()
+
             self.protan = HoverEvent(self.sshFile, self.hoverStyle, "Protan", self)
-            self.protan.move(self.width * 0.13 + 406, self.height * 0.89 - 116)
+            self.protan.move(self.width * 0.2 + 289, self.height * 0.85 - 100)
             self.protan.clicked.connect(self.set_to_p)
 
             self.deutan = HoverEvent(self.sshFile, self.hoverStyle, "Deutan", self)
-            self.deutan.move(self.width * 0.13 + 406, self.height * 0.89 - 75)
+            self.deutan.move(self.width * 0.2 + 289, self.height * 0.85 - 65)
             self.deutan.clicked.connect(self.set_to_d)
 
             self.tritan = HoverEvent(self.sshFile, self.hoverStyle, "Tritan", self)
-            self.tritan.move(self.width * 0.13 + 406, self.height * 0.89 - 34)
+            self.tritan.move(self.width * 0.2 + 289, self.height * 0.85 - 30)
             self.tritan.clicked.connect(self.set_to_t)
 
             self.isOnDef = True
@@ -186,6 +202,7 @@ class VideoWidget(QWidget):
             self.protan.hide()
             self.deutan.hide()
             self.tritan.hide()
+            self.defBase.hide()
 
             self.isOnDef = False
 
@@ -221,7 +238,7 @@ class VideoWidget(QWidget):
         self.color_converter.set_deficit('t')
 
     def set_key(self):
-        self.color_converter.set_key(-1 * self.scale.value(), -1 * self.zoom.value())
+        self.color_converter.set_key(-1.0 * self.scale.value(), -1.0 * self.zoom.value())
 
 
 class DeficiencyWindow(QWidget):
@@ -229,39 +246,41 @@ class DeficiencyWindow(QWidget):
     def __init__(self, parent = None):
         QWidget.__init__(self)
 
-        self.sshFile="style2.stylesheet"
-        self.hoverStyle = "hoverstyle.stylesheet"
+        self.width = 800
+        self.height = 600
+
+        self.sshFile="newstyle2.stylesheet"
+        self.hoverStyle = "newhoverstyle.stylesheet"
 
         with open(self.sshFile, "r") as fh:
 
             self.setStyleSheet(fh.read())
 
-        self.setGeometry(300,50,600,400)
+        self.setGeometry(300,50,800,600)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("Binocolors.png")
+        pixmap = QPixmap("newBinocolors.png")
         image.setPixmap(pixmap)
-        image.move(150,0)
+        image.move(self.width * 0.2, self.height * 0.07)
         image.show()
 
-        # label = QtGui.QLabel(self)
-        # label.setText("What type of colorblind are you?")
-        # label.move(180, 130)
-
         red = HoverEvent(self.sshFile, self.hoverStyle, "Red", self)
-        red.move(130, 150)
+        red.move(260, 300)
         red.clicked.connect(self.launch_clickedP)
 
         green = HoverEvent(self.sshFile, self.hoverStyle, "Green", self)
-        green.move(130, 230)
+        green.move(260, 370)
         green.clicked.connect(self.launch_clickedD)
 
         blue = HoverEvent(self.sshFile, self.hoverStyle, "Blue", self)
-        blue.move(130, 310)
+        blue.move(260, 440)
         blue.clicked.connect(self.launch_clickedT)
 
+        # p = self.palette()
+        # p.setColor(self.backgroundRole(), QtCore.Qt.white)
+        # self.setPalette(p)
         p = self.palette()
-        p.setColor(self.backgroundRole(), QtCore.Qt.white)
+        p.setBrush(QPalette.Background, QBrush(QPixmap("background.jpg")))
         self.setPalette(p)
 
     def launch_clickedD(self):
@@ -288,42 +307,51 @@ class WelcomeWindow(QWidget):
     def __init__(self, parent = None):
         QWidget.__init__(self)
 
-        self.sshFile="style1.stylesheet"
-        self.hoverStyle = "hoverstyle.stylesheet"
+        self.width = 800
+        self.height = 600
+
+        self.sshFile="newstyle1.stylesheet"
+        self.hoverStyle = "newhoverstyle.stylesheet"
 
         fh = open(self.sshFile, "r")
         self.setStyleSheet(fh.read())
 
-        self.setGeometry(300, 50, 600, 400)
+        self.setGeometry(300, 50, 800, 600)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("Binocolors.png")
+        pixmap = QPixmap("newBinocolors.png")
         image.setAccessibleName("logo")
         image.setPixmap(pixmap)
-        image.move(150, 0)
+        image.move(self.width * 0.2, self.height * 0.07)
         image.show()
 
+        # label = QtGui.QLabel(self)
+        # pixmap = QPixmap("question1.png")
+        # label.setAccessibleName("question")
+        # label.setPixmap(pixmap)
+        # label.move(self.width * 0.25, self.height * 0.35)
+        # label.show()
+
         label = QtGui.QLabel(self)
-        pixmap = QPixmap("question1.png")
         label.setAccessibleName("question")
-        label.setPixmap(pixmap)
-        label.move(100, 130)
+        label.setText("<font size= '6' color='black'> Do you know what type of color blindness you have? </font>")
+        label.move(self.width * 0.12, self.height * 0.45)
         label.show()
 
-        # p = self.palette()
-        # p.setBrush(QPalette.Background, QBrush(QPixmap("images")))
-        # self.setPalette(p)
-
         p = self.palette()
-        p.setColor(self.backgroundRole(), QtCore.Qt.white)
+        p.setBrush(QPalette.Background, QBrush(QPixmap("background.jpg")))
         self.setPalette(p)
 
+        # p = self.palette()
+        # p.setColor(self.backgroundRole(), QtCore.Qt.white)
+        # self.setPalette(p)
+
         yes = HoverEvent(self.sshFile, self.hoverStyle, "Yes", self)
-        yes.move(120, 200)
+        yes.move(300, 400)
         yes.clicked.connect(self.launch_if_yes)
 
         no = HoverEvent(self.sshFile, self.hoverStyle, "No", self)
-        no.move(120, 290)
+        no.move(400, 400)
         no.clicked.connect(self.open_test)
 
     def launch_if_yes(self):
@@ -334,8 +362,33 @@ class WelcomeWindow(QWidget):
 
     def open_test(self):
 
-        webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
+        self.nextWindow = DeficiencyWindow()
+        self.test = WebTest()
+        self.nextWindow.show()
+        self.test.show()
+        self.hide()
+        # webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
 
+class WebTest(QWidget):
+
+    def __init__(self, parent = None):
+        QWidget.__init__(self)
+
+        self.sshFile="newstyle1.stylesheet"
+        self.hoverStyle = "newhoverstyle.stylesheet"
+
+        fh = open(self.sshFile, "r")
+        self.setStyleSheet(fh.read())
+
+        self.setGeometry(200, 0, 900, 600)
+
+        view = QtWebKit.QWebView(self)
+        view.setGeometry(0, 0, 900, 400)
+
+        url = "index.html#"
+        view.setWindowTitle(url)
+        view.load(QUrl(url))
+        view.show()
 
 if __name__ == '__main__':
 

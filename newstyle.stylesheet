@@ -1,0 +1,200 @@
+QPushButton[accessibleName="Zoom"] {
+    background-image: url("newzoom.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Adj"] {
+    background-image: url("newadj.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Def"] {
+    background-image: url("newdef.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 77px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="FullScreen"] {
+    background-image: url("newfullscreen.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Capture"] {
+    background-image: url("newcapture.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Rec"] {
+    background-image: url("newrec.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Protan"] {
+    background-image: url("newvideoprotan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QPushButton[accessibleName="Deutan"] {
+    background-image: url("newvideodeutan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QPushButton[accessibleName="Tritan"] {
+    background-image: url("newvideotritan.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QScrollBar:vertical {
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     background: #5f5f60;
+     width: 20px;
+     height: 290px;
+     margin: 22px 0 22px 0;
+ }
+
+ QScrollBar::handle:vertical {
+     background: #e7e7e8;
+     height: 10px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+
+ }
+
+ QScrollBar::add-line:vertical {
+     border: 2px solid grey;
+     background: #5f5f60;
+     height: 20px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::sub-line:vertical {
+     border: 2px solid grey;
+     background: #5f5f60;
+     height: 20px;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 5px;
+     border-color: transparent;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+     border: 2px solid grey;
+     width: 3px;
+     height: 1px;
+     background: #e7e7e8;
+ }
+
+ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }
+
+ QLabel [accessibleName="Label"]{
+    background-image: url("label.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: transparent;
+    font-family: "Grand Hotel";
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+    width: 592px;
+    height: 72px;
+}
+
+ QLabel [accessibleName="DefBase"]{
+    background-image: url("defbase.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: transparent;
+    font-family: "Grand Hotel";
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+    width: 80px;
+    height: 127px;
+}

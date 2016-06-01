@@ -1,0 +1,162 @@
+QPushButton[accessibleName="Zoom"] {
+    background-image: url("newzoomhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 101px;
+    height: 80px;
+}
+
+QPushButton[accessibleName="Zoom"]:pressed {
+    background-image: url("newzoomhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Adj"] {
+    background-image: url("newadjhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Adj"]:pressed {
+    background-image: url("newadjhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Def"] {
+    background-image: url("newdefhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 77px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Def"]:pressed {
+    background-image: url("newdefhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="FullScreen"] {
+    background-image: url("newfullscreenhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="FullScreen"]:pressed {
+    background-image: url("newfullscreenhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Capture"] {
+    background-image: url("newcapturehover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Capture"]:pressed {
+    background-image: url("newcapturehover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Rec"] {
+    background-image: url("newrechover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="Rec"]:pressed {
+    background-image: url("newrechover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Protan"] {
+    background-image: url("newvideoprotanhover.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QPushButton[accessibleName="Protan"]:pressed {
+    background-image: url("newvideoprotanhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Deutan"] {
+    background-image: url("newvideodeutanhover.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QPushButton[accessibleName="Deutan"]:pressed {
+    background-image: url("newvideodeutanhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Tritan"] {
+    background-image: url("newvideotritanhover.png");
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 0px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 69px;
+    height: 22px;
+}
+
+QPushButton[accessibleName="Tritan"]:pressed {
+    background-image: url("newvideotritanhover.png");
+    border-style: outset;
+}
+

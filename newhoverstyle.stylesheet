@@ -1,0 +1,106 @@
+QPushButton[accessibleName="Red"] {
+    background-image: url("newprotanhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 280px;
+    height: 54px;
+}
+
+QPushButton[accessibleName="Red"]:pressed {
+    background-image: url("newprotanhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Green"] {
+    background-image: url("newdeutanhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 280px;
+    height: 54px;
+}
+
+QPushButton[accessibleName="Green"]:pressed {
+    background-image: url("newdeutanhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Blue"] {
+    background-image: url("newtritanhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 280px;
+    height: 54px;
+}
+
+QPushButton[accessibleName="Blue"]:pressed {
+    background-image: url("newtritanhover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="Yes"] {
+    background-image: url("newyeshover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 90px;
+    height: 131px;
+}
+
+QPushButton[accessibleName="Yes"]:pressed {
+    background-image: url("newyeshover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="No"] {
+    background-image: url("newnohover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 87px;
+    height: 132px;
+}
+
+QPushButton[accessibleName="No"]:pressed {
+    background-image: url("newnohover.png");
+    border-style: outset;
+}
+
+QLabel {
+    background-image: url("Binocolors.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: transparent;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 0;
+    margin: 0;
+    width: 414px;
+    height: 160px;
+}
