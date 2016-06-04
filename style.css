@@ -1,0 +1,48 @@
+head {
+	
+}
+
+body {
+    overflow:hidden;
+	background-color: #888888;
+}
+.center-block {
+ 	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+}
+
+.container {
+    height: 2000px;
+    width: 80%;
+}
+
+.overview {
+    border-radius: 5px;
+    display:inline-block;
+    position: relative;
+    margin: 1%;
+    float:center;
+    width:98%;
+    height:130px;
+    background-color: WhiteSmoke;
+}
+
+p.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50em
+}
+
+.row {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+ul#sortable li {
+    list-style-type:none;
+    display: inline;
+    float: left;
+    width: 60px;
+}
+

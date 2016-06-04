@@ -41,14 +41,14 @@ QLabel[accessibleName="logo"]{
 }
 
 QLabel [accessibleName="question"]{
+    background-image: url("question.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 5px;
     border-color: transparent;
-    font-family: "Grand Hotel";
-    font-size: 50px;
+    font-size: 14px;
     padding: 0;
     margin: 0;
-    width: 400px;
-    height: 32px;
+    width: 500px;
+    height: 60px;
 }

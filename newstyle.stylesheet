@@ -85,8 +85,8 @@ QPushButton[accessibleName="Protan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 49px;
 }
 
 QPushButton[accessibleName="Deutan"] {
@@ -98,8 +98,8 @@ QPushButton[accessibleName="Deutan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 33px;
 }
 
 QPushButton[accessibleName="Tritan"] {
@@ -111,64 +111,57 @@ QPushButton[accessibleName="Tritan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 33px;
 }
 
 QScrollBar:vertical {
+     background: transparent;
+     background-image: url("newslider.png");
      border-style: outset;
-     border-width: 2px;
-     border-radius: 5px;
+     border-width: 0px;
+     border-radius: 0px;
      border-color: transparent;
-     background: #5f5f60;
      width: 20px;
      height: 290px;
-     margin: 22px 0 22px 0;
+     margin: 22px 0 25px 0;
  }
 
  QScrollBar::handle:vertical {
-     background: #e7e7e8;
-     height: 10px;
-     border-style: outset;
-     border-width: 2px;
-     border-radius: 5px;
+     background: transparent;
+     background-image: url("sliderbutton.png");
+     border-width: 0px;
+     border-radius: 0px;
      border-color: transparent;
-
+     padding: 18;
  }
 
  QScrollBar::add-line:vertical {
-     border: 2px solid grey;
-     background: #5f5f60;
-     height: 20px;
+     background-image: url("minus.png");
+     height: 32px;
+     width: 20px;
      border-style: outset;
-     border-width: 2px;
-     border-radius: 5px;
+     border-width: 0px;
+     border-radius: 0px;
      border-color: transparent;
      subcontrol-position: bottom;
      subcontrol-origin: margin;
  }
 
  QScrollBar::sub-line:vertical {
-     border: 2px solid grey;
-     background: #5f5f60;
-     height: 20px;
+     background-image: url("plus.png");
+     height: 32px;
+     width: 20px;
      border-style: outset;
-     border-width: 2px;
-     border-radius: 5px;
+     border-width: 0px;
+     border-radius: 0px;
      border-color: transparent;
      subcontrol-position: top;
      subcontrol-origin: margin;
  }
 
- QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-     border: 2px solid grey;
-     width: 3px;
-     height: 1px;
-     background: #e7e7e8;
- }
-
  QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-     background: none;
+     background: transparent;
  }
 
  QLabel [accessibleName="Label"]{
@@ -195,6 +188,6 @@ QScrollBar:vertical {
     font-size: 50px;
     padding: 0;
     margin: 0;
-    width: 80px;
-    height: 127px;
+    width: 81px;
+    height: 112px;
 }

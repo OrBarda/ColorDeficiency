@@ -115,8 +115,8 @@ QPushButton[accessibleName="Protan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 49px;
 }
 
 QPushButton[accessibleName="Protan"]:pressed {
@@ -133,8 +133,8 @@ QPushButton[accessibleName="Deutan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 33px;
 }
 
 QPushButton[accessibleName="Deutan"]:pressed {
@@ -151,8 +151,8 @@ QPushButton[accessibleName="Tritan"] {
     font: bold 14px;
     padding: 0;
     margin: 0;
-    width: 69px;
-    height: 22px;
+    width: 81px;
+    height: 33px;
 }
 
 QPushButton[accessibleName="Tritan"]:pressed {

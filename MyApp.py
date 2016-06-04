@@ -69,6 +69,8 @@ class VideoWidget(QWidget):
 
         QWidget.__init__(self)
         self.imageCount = 1
+        self.recCount = 1
+        self.toRecord = False
         self.isOnZoom = False
         self.isOnAdj = False
         self.isOnDef = False
@@ -128,12 +130,12 @@ class VideoWidget(QWidget):
 
         rec = HoverEvent(self.sshFile, self.hoverStyle, "Rec", self)
         rec.move(self.width * 0.2 + 213, self.height * 0.85 + 4)
-        rec.clicked.connect(self.set_to_t)
+        rec.clicked.connect(self.record)
 
         self.zoom = QtGui.QScrollBar(self)
         self.zoom.setMaximum(-1)
         self.zoom.setMinimum(-100)
-        self.zoom.move(self.width * 0.2 + 592, self.height * 0.85 - 218)
+        self.zoom.move(self.width * 0.2 + 594, self.height * 0.85 - 218)
         self.zoom.valueChanged.connect(self.set_key)
         self.zoom.hide()
 
@@ -141,7 +143,7 @@ class VideoWidget(QWidget):
         self.scale.setMaximum(0)
         self.scale.setMinimum(-100)
         self.scale.setValue(-100)
-        self.scale.move(self.width * 0.2 - 20, self.height * 0.85 - 218)
+        self.scale.move(self.width * 0.2 - 22, self.height * 0.85 - 218)
         self.scale.valueChanged.connect(self.set_key)
         self.scale.hide()
 
@@ -162,6 +164,10 @@ class VideoWidget(QWidget):
         ret, frame = self.capture.read()
         image = self.color_converter.convert(frame)
         self._image = self._build_image(image)
+
+        if(self.toRecord):
+            self.out.write(image)
+
         self.update()
 
     def capture_image(self):
@@ -173,28 +179,38 @@ class VideoWidget(QWidget):
         self.update()
         cv2.waitKey(500)
 
+    def record(self):
+
+        if(not self.toRecord):
+
+            self.out = cv2.VideoWriter("BinocolorsVideo" + str(self.recCount) + ".avi", -1, 20.0, (1024, 768))
+            self.toRecord = True
+            self.recCount += 1
+        else:
+            self.toRecord = False
+
 
     def open_def(self):
 
         if(self.isOnDef == False):
 
-            self.defBase = QtGui.QLabel(self)
-            pixmap = QPixmap("defbase.png")
-            self.defBase.setAccessibleName("DefBase")
-            self.defBase.setPixmap(pixmap)
-            self.defBase.move(self.width * 0.2 + 283, self.height * 0.85 - 127)
-            self.defBase.show()
+            # self.defBase = QtGui.QLabel(self)
+            # pixmap = QPixmap("defbase.png")
+            # self.defBase.setAccessibleName("DefBase")
+            # self.defBase.setPixmap(pixmap)
+            # self.defBase.move(self.width * 0.2 + 284, self.height * 0.85 - 112)
+            # self.defBase.show()
 
             self.protan = HoverEvent(self.sshFile, self.hoverStyle, "Protan", self)
-            self.protan.move(self.width * 0.2 + 289, self.height * 0.85 - 100)
+            self.protan.move(self.width * 0.2 + 284, self.height * 0.85 - 101)
             self.protan.clicked.connect(self.set_to_p)
 
             self.deutan = HoverEvent(self.sshFile, self.hoverStyle, "Deutan", self)
-            self.deutan.move(self.width * 0.2 + 289, self.height * 0.85 - 65)
+            self.deutan.move(self.width * 0.2 + 284, self.height * 0.85 - 52)
             self.deutan.clicked.connect(self.set_to_d)
 
             self.tritan = HoverEvent(self.sshFile, self.hoverStyle, "Tritan", self)
-            self.tritan.move(self.width * 0.2 + 289, self.height * 0.85 - 30)
+            self.tritan.move(self.width * 0.2 + 284, self.height * 0.85 - 26)
             self.tritan.clicked.connect(self.set_to_t)
 
             self.isOnDef = True
@@ -202,7 +218,7 @@ class VideoWidget(QWidget):
             self.protan.hide()
             self.deutan.hide()
             self.tritan.hide()
-            self.defBase.hide()
+            # self.defBase.hide()
 
             self.isOnDef = False
 
@@ -325,18 +341,18 @@ class WelcomeWindow(QWidget):
         image.move(self.width * 0.2, self.height * 0.07)
         image.show()
 
-        # label = QtGui.QLabel(self)
-        # pixmap = QPixmap("question1.png")
-        # label.setAccessibleName("question")
-        # label.setPixmap(pixmap)
-        # label.move(self.width * 0.25, self.height * 0.35)
-        # label.show()
-
         label = QtGui.QLabel(self)
+        pixmap = QPixmap("question.png")
         label.setAccessibleName("question")
-        label.setText("<font size= '6' color='black'> Do you know what type of color blindness you have? </font>")
-        label.move(self.width * 0.12, self.height * 0.45)
+        label.setPixmap(pixmap)
+        label.move(self.width * 0.19, self.height * 0.44)
         label.show()
+
+        # label = QtGui.QLabel(self)
+        # label.setAccessibleName("question")
+        # label.setText("<font size= '6' color='black'> Do you know what type of color blindness you have? </font>")
+        # label.move(self.width * 0.12, self.height * 0.45)
+        # label.show()
 
         p = self.palette()
         p.setBrush(QPalette.Background, QBrush(QPixmap("background.jpg")))
@@ -380,10 +396,10 @@ class WebTest(QWidget):
         fh = open(self.sshFile, "r")
         self.setStyleSheet(fh.read())
 
-        self.setGeometry(200, 0, 900, 600)
+        self.setGeometry(300, 0, 800, 600)
 
         view = QtWebKit.QWebView(self)
-        view.setGeometry(0, 0, 900, 400)
+        view.setGeometry(-20, 0, 850, 600)
 
         url = "index.html#"
         view.setWindowTitle(url)
