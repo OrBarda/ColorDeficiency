@@ -1,3 +1,28 @@
+QPushButton[accessibleName="Html"]{
+    background: #bdbdbd;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: black;
+    font: 14px;
+    padding: 0;
+    margin: 0;
+    width: 80px;
+    height: 25px;
+}
+
+QPushButton[accessibleName="Finish"]{
+    background: #bdbdbd;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: black;
+    font: 14px;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+    height: 40px;
+}
 
 QPushButton[accessibleName="Yes"] {
     background-image: url("newyes.png");

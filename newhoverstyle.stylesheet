@@ -1,3 +1,29 @@
+QPushButton[accessibleName="Html"]{
+    background: #696969;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: black;
+    font: 14px;
+    padding: 0;
+    margin: 0;
+    width: 80px;
+    height: 25px;
+}
+
+QPushButton[accessibleName="Finish"]{
+    background: #696969;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: black;
+    font: 14px;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+    height: 40px;
+}
+
 QPushButton[accessibleName="Red"] {
     background-image: url("newprotanhover.png");
     border-style: outset;

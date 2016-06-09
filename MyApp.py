@@ -370,6 +370,7 @@ class WelcomeWindow(QWidget):
         no.move(400, 400)
         no.clicked.connect(self.open_test)
 
+
     def launch_if_yes(self):
 
         self.nextWindow = DeficiencyWindow()
@@ -378,9 +379,7 @@ class WelcomeWindow(QWidget):
 
     def open_test(self):
 
-        self.nextWindow = DeficiencyWindow()
         self.test = WebTest()
-        self.nextWindow.show()
         self.test.show()
         self.hide()
         # webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
@@ -405,6 +404,49 @@ class WebTest(QWidget):
         view.setWindowTitle(url)
         view.load(QUrl(url))
         view.show()
+
+        button = HoverEvent(self.sshFile, self.hoverStyle, "Html", self)
+        button.setText("I'm done")
+        button.move(610, 220)
+        button.clicked.connect(self.open_next_window)
+
+    def open_next_window(self):
+        self.testResult = TestResult()
+        self.testResult.show()
+        self.hide()
+
+
+
+class TestResult(QWidget):
+    def __init__(self, parent = None):
+        QWidget.__init__(self)
+
+        self.sshFile="newstyle1.stylesheet"
+        self.hoverStyle = "newhoverstyle.stylesheet"
+
+        fh = open(self.sshFile, "r")
+        self.setStyleSheet(fh.read())
+
+        self.setGeometry(300, 0, 800, 600)
+
+        view = QtWebKit.QWebView(self)
+        view.setGeometry(-20, 0, 850, 600)
+
+        url = "index2.html#"
+        view.setWindowTitle(url)
+        view.load(QUrl(url))
+        view.show()
+
+        button = HoverEvent(self.sshFile, self.hoverStyle, "Finish", self)
+        button.setText("Finish")
+        button.move(610, 210)
+        button.clicked.connect(self.open_next_window)
+
+    def open_next_window(self):
+        self.nextWindow = DeficiencyWindow()
+        self.nextWindow.show()
+        self.hide()
+
 
 if __name__ == '__main__':
 
