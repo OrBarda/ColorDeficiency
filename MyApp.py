@@ -275,9 +275,9 @@ class DeficiencyWindow(QWidget):
         self.setGeometry(300,50,800,600)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("newBinocolors.png")
+        pixmap = QPixmap("newBinocolors1.png")
         image.setPixmap(pixmap)
-        image.move(self.width * 0.2, self.height * 0.07)
+        image.move(self.width * 0.2, self.height * 0.1)
         image.show()
 
         red = HoverEvent(self.sshFile, self.hoverStyle, "Red", self)
@@ -335,10 +335,10 @@ class WelcomeWindow(QWidget):
         self.setGeometry(300, 50, 800, 600)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("newBinocolors.png")
+        pixmap = QPixmap("newBinocolors1.png")
         image.setAccessibleName("logo")
         image.setPixmap(pixmap)
-        image.move(self.width * 0.2, self.height * 0.07)
+        image.move(self.width * 0.2, self.height * 0.1)
         image.show()
 
         label = QtGui.QLabel(self)
