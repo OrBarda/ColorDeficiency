@@ -10,10 +10,8 @@ from PyQt4 import QtWebKit
 from PyQt4 import QtCore
 from PyQt4.QtGui import *
 from PyQt4 import QtGui
-import numpy
 import cv2
 import ColorConverter
-import webbrowser
 
 
 class IplQImage(QImage):
@@ -59,6 +57,16 @@ class HoverEvent(QPushButton):
     def leaveEvent(self, event):
 
         self.fs.seek(0)
+        self.setStyleSheet(self.fs.read())
+
+    def set_hover(self, hoverStyle):
+        self.hoverStyle = hoverStyle
+        self.fhs = open(self.hoverStyle)
+        self.setStyleSheet(self.fhs.read())
+
+    def set_style(self, style):
+        self.style = style
+        self.fs = open(self.style)
         self.setStyleSheet(self.fs.read())
 
 
@@ -108,36 +116,35 @@ class VideoWidget(QWidget):
         image.move(self.width * 0.2, self.height * 0.85)
         image.show()
 
-        zoom = HoverEvent(self.sshFile, self.hoverStyle, "Zoom", self)
-        zoom.move(self.width * 0.2 + 513, self.height * 0.85 + 4)
-        zoom.clicked.connect(self.open_zoom)
+        self.zoom = HoverEvent(self.sshFile, self.hoverStyle, "Zoom", self)
+        self.zoom.move(self.width * 0.2 + 513, self.height * 0.85 + 4)
+        self.zoom.clicked.connect(self.open_zoom)
 
-        adjust = HoverEvent(self.sshFile, self.hoverStyle, "Adj", self)
-        adjust.move(self.width * 0.2 + 20, self.height * 0.85 + 4)
-        adjust.clicked.connect(self.open_adj)
+        self.adjust = HoverEvent(self.sshFile, self.hoverStyle, "Adj", self)
+        self.adjust.move(self.width * 0.2 + 20, self.height * 0.85 + 4)
+        self.adjust.clicked.connect(self.open_adj)
 
-        deficiency = HoverEvent(self.sshFile, self.hoverStyle, "Def", self)
-        deficiency.move(self.width * 0.2 + 283, self.height * 0.85 + 4)
-        deficiency.clicked.connect(self.open_def)
+        self.deficiency = HoverEvent(self.sshFile, self.hoverStyle, "Def", self)
+        self.deficiency.move(self.width * 0.2 + 283, self.height * 0.85 + 4)
+        self.deficiency.clicked.connect(self.open_def)
 
         fullScreen = HoverEvent(self.sshFile, self.hoverStyle, "FullScreen", self)
         fullScreen.move(self.width * 0.2 + 373, self.height * 0.85 + 4)
-        fullScreen.clicked.connect(self.set_to_t)
 
         capture = HoverEvent(self.sshFile, self.hoverStyle, "Capture", self)
         capture.move(self.width * 0.2 + 143, self.height * 0.85 + 4)
         capture.clicked.connect(self.capture_image)
 
-        rec = HoverEvent(self.sshFile, self.hoverStyle, "Rec", self)
-        rec.move(self.width * 0.2 + 213, self.height * 0.85 + 4)
-        rec.clicked.connect(self.record)
+        self.rec = HoverEvent(self.sshFile, self.hoverStyle, "Rec", self)
+        self.rec.move(self.width * 0.2 + 213, self.height * 0.85 + 4)
+        self.rec.clicked.connect(self.record)
 
-        self.zoom = QtGui.QScrollBar(self)
-        self.zoom.setMaximum(-1)
-        self.zoom.setMinimum(-100)
-        self.zoom.move(self.width * 0.2 + 594, self.height * 0.85 - 218)
-        self.zoom.valueChanged.connect(self.set_key)
-        self.zoom.hide()
+        self.zoomScroll = QtGui.QScrollBar(self)
+        self.zoomScroll.setMaximum(-1)
+        self.zoomScroll.setMinimum(-100)
+        self.zoomScroll.move(self.width * 0.2 + 594, self.height * 0.85 - 218)
+        self.zoomScroll.valueChanged.connect(self.set_key)
+        self.zoomScroll.hide()
 
         self.scale = QtGui.QScrollBar(self)
         self.scale.setMaximum(0)
@@ -165,7 +172,7 @@ class VideoWidget(QWidget):
         image = self.color_converter.convert(frame)
         self._image = self._build_image(image)
 
-        if(self.toRecord):
+        if self.toRecord:
             self.out.write(image)
 
         self.update()
@@ -181,25 +188,24 @@ class VideoWidget(QWidget):
 
     def record(self):
 
-        if(not self.toRecord):
-
+        if not self.toRecord:
+            self.rec.setAccessibleName("RecRed")
+            self.rec.set_style(self.sshFile)
+            self.rec.set_hover(self.hoverStyle)
             self.out = cv2.VideoWriter("BinocolorsVideo" + str(self.recCount) + ".avi", -1, 20.0, (1024, 768))
             self.toRecord = True
             self.recCount += 1
         else:
+            self.rec.setAccessibleName("Rec")
+            self.rec.set_style(self.sshFile)
+            self.rec.set_hover(self.hoverStyle)
             self.toRecord = False
-
 
     def open_def(self):
 
-        if(self.isOnDef == False):
+        if not self.isOnDef:
 
-            # self.defBase = QtGui.QLabel(self)
-            # pixmap = QPixmap("defbase.png")
-            # self.defBase.setAccessibleName("DefBase")
-            # self.defBase.setPixmap(pixmap)
-            # self.defBase.move(self.width * 0.2 + 284, self.height * 0.85 - 112)
-            # self.defBase.show()
+            self.deficiency.set_style(self.hoverStyle)
 
             self.protan = HoverEvent(self.sshFile, self.hoverStyle, "Protan", self)
             self.protan.move(self.width * 0.2 + 284, self.height * 0.85 - 101)
@@ -215,32 +221,35 @@ class VideoWidget(QWidget):
 
             self.isOnDef = True
         else:
+            self.deficiency.set_style(self.sshFile)
+
             self.protan.hide()
             self.deutan.hide()
             self.tritan.hide()
-            # self.defBase.hide()
 
             self.isOnDef = False
 
     def open_zoom(self):
 
-        if(self.isOnZoom == False):
-
-            self.zoom.show()
+        if not self.isOnZoom:
+            self.zoom.set_style(self.hoverStyle)
+            self.zoomScroll.show()
             self.isOnZoom = True
 
         else:
-            self.zoom.hide()
+            self.zoom.set_style(self.sshFile)
+            self.zoomScroll.hide()
             self.isOnZoom = False
 
     def open_adj(self):
 
-        if(self.isOnAdj == False):
-
+        if not self.isOnAdj:
+            self.adjust.set_style(self.hoverStyle)
             self.scale.show()
             self.isOnAdj = True
 
         else:
+            self.adjust.set_style(self.sshFile)
             self.scale.hide()
             self.isOnAdj = False
 
@@ -254,12 +263,12 @@ class VideoWidget(QWidget):
         self.color_converter.set_deficit('t')
 
     def set_key(self):
-        self.color_converter.set_key(-1.0 * self.scale.value(), -1.0 * self.zoom.value())
+        self.color_converter.set_key(-1.0 * self.scale.value(), -1.0 * self.zoomScroll.value())
 
 
 class DeficiencyWindow(QWidget):
 
-    def __init__(self, parent = None):
+    def __init__(self):
         QWidget.__init__(self)
 
         self.width = 800
@@ -272,10 +281,10 @@ class DeficiencyWindow(QWidget):
 
             self.setStyleSheet(fh.read())
 
-        self.setGeometry(300,50,800,600)
+        self.setGeometry(300, 50, self.width, self.height)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("newBinocolors1.png")
+        pixmap = QPixmap("Secondwindow/newBinocolors1.png")
         image.setPixmap(pixmap)
         image.move(self.width * 0.2, self.height * 0.1)
         image.show()
@@ -292,11 +301,8 @@ class DeficiencyWindow(QWidget):
         blue.move(260, 440)
         blue.clicked.connect(self.launch_clickedT)
 
-        # p = self.palette()
-        # p.setColor(self.backgroundRole(), QtCore.Qt.white)
-        # self.setPalette(p)
         p = self.palette()
-        p.setBrush(QPalette.Background, QBrush(QPixmap("background.jpg")))
+        p.setBrush(QPalette.Background, QBrush(QPixmap("Secondwindow/background.jpg")))
         self.setPalette(p)
 
     def launch_clickedD(self):
@@ -320,7 +326,7 @@ class DeficiencyWindow(QWidget):
 
 class WelcomeWindow(QWidget):
 
-    def __init__(self, parent = None):
+    def __init__(self):
         QWidget.__init__(self)
 
         self.width = 800
@@ -332,17 +338,17 @@ class WelcomeWindow(QWidget):
         fh = open(self.sshFile, "r")
         self.setStyleSheet(fh.read())
 
-        self.setGeometry(300, 50, 800, 600)
+        self.setGeometry(300, 50, self.width, self.height)
 
         image = QtGui.QLabel(self)
-        pixmap = QPixmap("newBinocolors1.png")
+        pixmap = QPixmap("Firstwindow/newBinocolors1.png")
         image.setAccessibleName("logo")
         image.setPixmap(pixmap)
         image.move(self.width * 0.2, self.height * 0.1)
         image.show()
 
         label = QtGui.QLabel(self)
-        pixmap = QPixmap("question.png")
+        pixmap = QPixmap("Firstwindow/question.png")
         label.setAccessibleName("question")
         label.setPixmap(pixmap)
         label.move(self.width * 0.19, self.height * 0.44)
@@ -355,7 +361,7 @@ class WelcomeWindow(QWidget):
         # label.show()
 
         p = self.palette()
-        p.setBrush(QPalette.Background, QBrush(QPixmap("background.jpg")))
+        p.setBrush(QPalette.Background, QBrush(QPixmap("Firstwindow/background.jpg")))
         self.setPalette(p)
 
         # p = self.palette()
@@ -370,7 +376,6 @@ class WelcomeWindow(QWidget):
         no.move(400, 400)
         no.clicked.connect(self.open_test)
 
-
     def launch_if_yes(self):
 
         self.nextWindow = DeficiencyWindow()
@@ -384,12 +389,13 @@ class WelcomeWindow(QWidget):
         self.hide()
         # webbrowser.open('http://www.color-blindness.com/fm100hue/FM100Hue.swf?width=980&height=500')
 
+
 class WebTest(QWidget):
 
-    def __init__(self, parent = None):
+    def __init__(self):
         QWidget.__init__(self)
 
-        self.sshFile="newstyle1.stylesheet"
+        self.sshFile = "newstyle1.stylesheet"
         self.hoverStyle = "newhoverstyle.stylesheet"
 
         fh = open(self.sshFile, "r")
@@ -418,10 +424,10 @@ class WebTest(QWidget):
 
 
 class TestResult(QWidget):
-    def __init__(self, parent = None):
+    def __init__(self):
         QWidget.__init__(self)
 
-        self.sshFile="newstyle1.stylesheet"
+        self.sshFile = "newstyle1.stylesheet"
         self.hoverStyle = "newhoverstyle.stylesheet"
 
         fh = open(self.sshFile, "r")
@@ -443,6 +449,7 @@ class TestResult(QWidget):
         button.clicked.connect(self.open_next_window)
 
     def open_next_window(self):
+
         self.nextWindow = DeficiencyWindow()
         self.nextWindow.show()
         self.hide()
@@ -452,8 +459,11 @@ if __name__ == '__main__':
 
     app = QtGui.QApplication(sys.argv)
 
-    welcomeWindow = WelcomeWindow()
+    while True:
 
-    welcomeWindow.show()
+        welcomeWindow = WelcomeWindow()
 
-    app.exec_()
+        welcomeWindow.show()
+
+        app.exec_()
+

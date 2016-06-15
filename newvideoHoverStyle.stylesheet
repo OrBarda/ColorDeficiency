@@ -1,5 +1,5 @@
 QPushButton[accessibleName="Zoom"] {
-    background-image: url("newzoomhover.png");
+    background-image: url("Videowindow/newzoomhover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -12,12 +12,12 @@ QPushButton[accessibleName="Zoom"] {
 }
 
 QPushButton[accessibleName="Zoom"]:pressed {
-    background-image: url("newzoomhover.png");
+    background-image: url("Videowindow/newzoomhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Adj"] {
-    background-image: url("newadjhover.png");
+    background-image: url("Videowindow/newadjhover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -30,12 +30,12 @@ QPushButton[accessibleName="Adj"] {
 }
 
 QPushButton[accessibleName="Adj"]:pressed {
-    background-image: url("newadjhover.png");
+    background-image: url("Videowindow/newadjhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Def"] {
-    background-image: url("newdefhover.png");
+    background-image: url("Videowindow/newdefhover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -48,12 +48,12 @@ QPushButton[accessibleName="Def"] {
 }
 
 QPushButton[accessibleName="Def"]:pressed {
-    background-image: url("newdefhover.png");
+    background-image: url("Videowindow/newdefhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="FullScreen"] {
-    background-image: url("newfullscreenhover.png");
+    background-image: url("Videowindow/newfullscreenhover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -66,12 +66,12 @@ QPushButton[accessibleName="FullScreen"] {
 }
 
 QPushButton[accessibleName="FullScreen"]:pressed {
-    background-image: url("newfullscreenhover.png");
+    background-image: url("Videowindow/newfullscreenhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Capture"] {
-    background-image: url("newcapturehover.png");
+    background-image: url("Videowindow/newcapturehover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -84,12 +84,12 @@ QPushButton[accessibleName="Capture"] {
 }
 
 QPushButton[accessibleName="Capture"]:pressed {
-    background-image: url("newcapturehover.png");
+    background-image: url("Videowindow/newcapturehover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Rec"] {
-    background-image: url("newrechover.png");
+    background-image: url("Videowindow/newrechover.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -102,12 +102,30 @@ QPushButton[accessibleName="Rec"] {
 }
 
 QPushButton[accessibleName="Rec"]:pressed {
-    background-image: url("newrechover.png");
+    background-image: url("Videowindow/newrechover.png");
+    border-style: outset;
+}
+
+QPushButton[accessibleName="RecRed"] {
+    background-image: url("Videowindow/newrecredhover.png");
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: transparent;
+    font: bold 14px;
+    padding: 0;
+    margin: 0;
+    width: 59px;
+    height: 60px;
+}
+
+QPushButton[accessibleName="RecRed"]:pressed {
+    background-image: url("Videowindow/newrecredhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Protan"] {
-    background-image: url("newvideoprotanhover.png");
+    background-image: url("Videowindow/newvideoprotanhover.png");
     border-style: outset;
     border-width: 0px;
     border-radius: 0px;
@@ -120,12 +138,12 @@ QPushButton[accessibleName="Protan"] {
 }
 
 QPushButton[accessibleName="Protan"]:pressed {
-    background-image: url("newvideoprotanhover.png");
+    background-image: url("Videowindow/newvideoprotanhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Deutan"] {
-    background-image: url("newvideodeutanhover.png");
+    background-image: url("Videowindow/newvideodeutanhover.png");
     border-style: outset;
     border-width: 0px;
     border-radius: 0px;
@@ -138,12 +156,12 @@ QPushButton[accessibleName="Deutan"] {
 }
 
 QPushButton[accessibleName="Deutan"]:pressed {
-    background-image: url("newvideodeutanhover.png");
+    background-image: url("Videowindow/newvideodeutanhover.png");
     border-style: outset;
 }
 
 QPushButton[accessibleName="Tritan"] {
-    background-image: url("newvideotritanhover.png");
+    background-image: url("Videowindow/newvideotritanhover.png");
     border-style: outset;
     border-width: 0px;
     border-radius: 0px;
@@ -156,7 +174,7 @@ QPushButton[accessibleName="Tritan"] {
 }
 
 QPushButton[accessibleName="Tritan"]:pressed {
-    background-image: url("newvideotritanhover.png");
+    background-image: url("Videowindow/newvideotritanhover.png");
     border-style: outset;
 }
 

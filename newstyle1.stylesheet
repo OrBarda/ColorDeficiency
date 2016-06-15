@@ -25,7 +25,7 @@ QPushButton[accessibleName="Finish"]{
 }
 
 QPushButton[accessibleName="Yes"] {
-    background-image: url("newyes.png");
+    background-image: url("Firstwindow/newyes.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -39,7 +39,7 @@ QPushButton[accessibleName="Yes"] {
 
 
 QPushButton[accessibleName="No"] {
-    background-image: url("newno.png");
+    background-image: url("Firstwindow/newno.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -52,7 +52,7 @@ QPushButton[accessibleName="No"] {
 }
 
 QLabel[accessibleName="logo"]{
-    background-image: url("newBinocolors1.png");
+    background-image: url("Firstwindow/newBinocolors1.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 5px;
@@ -66,7 +66,7 @@ QLabel[accessibleName="logo"]{
 }
 
 QLabel [accessibleName="question"]{
-    background-image: url("question.png");
+    background-image: url("Firstwindow/question.png");
     border-style: outset;
     border-width: 2px;
     border-radius: 5px;
